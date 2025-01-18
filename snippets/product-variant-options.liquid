@@ -91,10 +91,18 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
+    {% if product.variants[forloop.index0].metafields.custom.color_1 and option.name == "色" %}
+      <label for="{{ input_id }}" style="background:linear-gradient(to right, {{ product.variants[forloop.index0].metafields.custom.color_1 }}, {{ product.variants[forloop.index0].metafields.custom.color_2 }});">
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      {{ label_unavailable }}
+    </label>
+    {% else %}
+      <label for="{{ input_id }}">
       {{ value -}}
       {{ label_unavailable }}
     </label>
+    {% endif %}
+    
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       id="{{ input_id }}"
